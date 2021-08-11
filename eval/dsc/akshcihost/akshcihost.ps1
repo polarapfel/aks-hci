@@ -7,7 +7,13 @@ configuration AKSHCIHost
         [Parameter(Mandatory)]
         [string]$environment,
         [Parameter(Mandatory)]
+        [string]$subId,
+        [Parameter(Mandatory)]
+        [string]$rgName,
+        [Parameter(Mandatory)]
         [System.Management.Automation.PSCredential]$Admincreds,
+        [Parameter(Mandatory)]
+        [System.Management.Automation.PSCredential]$spCreds,
         [Parameter(Mandatory)]
         [string]$enableDHCP,
         [Parameter(Mandatory)]

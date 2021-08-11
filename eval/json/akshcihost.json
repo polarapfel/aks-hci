@@ -115,9 +115,21 @@
         "adminPassword": {
             "type": "securestring"
         },
+        "servicePrincipalId": {
+            "type": "string",
+            "metadata": {
+                "description": "Provide your Service Principal App ID that has the correct permissions to register your AKS-HCI cluster with Azure."
+            }
+        },
+        "servicePrincipalSecret": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Provide your corresponding secret for the Service Principal App ID."
+            }
+        },
         "enableDHCP": {
             "type": "string",
-            "defaultValue": "Enabled",
+            "defaultValue": "Disabled",
             "allowedValues": [
                 "Enabled",
                 "Disabled"
@@ -300,9 +312,11 @@
     },
     "variables": {
         "dataDisksCount": 8,
-        "dscUri": "https://github.com/Azure/aks-hci/raw/main/eval/dsc/akshcihost.zip",
-        "artifactsLocation": "https://raw.githubusercontent.com/Azure/aks-hci/main/eval/",
+        "dscUri": "https://github.com/Azure/aks-hci/raw/arc-automation/eval/dsc/akshcihost.zip",
+        "artifactsLocation": "https://raw.githubusercontent.com/Azure/aks-hci/arc-automation/eval/",
         "randomGUID": "[substring(uniqueString(subscription().subscriptionId, resourceGroup().id, parameters('virtualMachineName')),0,6)]",
+        "rgName": "[resourceGroup().name]",
+        "subId": "[subscription().subscriptionId]",
         "dnsNameForPublicIP": "[toLower(concat(parameters('virtualMachineName'), variables('randomGUID')))]",
         "environment": "Workgroup",
         "virtualNetworkName": "AKSHCILabvNet",
@@ -530,7 +544,9 @@
                                 "DomainName": "[parameters('domainName')]",
                                 "environment": "[variables('environment')]",
                                 "enableDHCP": "[parameters('enableDHCP')]",
-                                "customRdpPort": "[parameters('customRdpPort')]"
+                                "customRdpPort": "[parameters('customRdpPort')]",
+                                "rgName": "[variables('rgName')]",
+                                "subId": "[variables('subId')]"
                             }
                         },
                         "protectedSettings": {
@@ -538,6 +554,10 @@
                                 "adminCreds": {
                                     "UserName": "[parameters('adminUsername')]",
                                     "Password": "[parameters('adminPassword')]"
+                                },
+                                "spCreds": {
+                                    "UserName": "[parameters('servicePrincipalId')]",
+                                    "Password": "[parameters('servicePrincipalSecret')]"
                                 }
                             }
                         }
