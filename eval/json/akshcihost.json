@@ -11,9 +11,9 @@
         },
         "virtualMachineSize": {
             "type": "string",
-            "defaultValue": "Standard_E16-4as_v4",
+            "defaultValue": "Standard_E16ds_v4",
             "allowedValues": [
-                "Standard_E16-4as_v4",
+                "Standard_E16ds_v4",
                 "Standard_D16s_v3",
                 "Standard_D32s_v3",
                 "Standard_D64s_v3",
