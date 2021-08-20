@@ -4,15 +4,16 @@
     "parameters": {
         "virtualMachineName": {
             "type": "string",
-            "defaultValue": "AKSHCIHost001",
+            "defaultValue": "AKSHCIEVAL",
             "metadata": {
                 "description": "Keep the VM name to less than 15 characters"
             }
         },
         "virtualMachineSize": {
             "type": "string",
-            "defaultValue": "Standard_E16s_v4",
+            "defaultValue": "Standard_E16-4as_v4",
             "allowedValues": [
+                "Standard_E16-4as_v4",
                 "Standard_D16s_v3",
                 "Standard_D32s_v3",
                 "Standard_D64s_v3",
@@ -110,7 +111,7 @@
         },
         "adminUsername": {
             "type": "string",
-            "defaultValue": "AzureUser"
+            "defaultValue": "HciAksEval"
         },
         "adminPassword": {
             "type": "securestring"
